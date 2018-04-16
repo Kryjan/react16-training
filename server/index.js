@@ -2,6 +2,7 @@ const booksData = require('./books');
 
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const compression = require('compression');
 const express = require('express');
 
 const { 
@@ -32,7 +33,15 @@ const byId = (id) => (book) => book.id === +id;
 
 const app = express();
 app.use(bodyParser.json()); 
-app.use(morgan('combined')); 
+app.use(morgan('combined'));
+app.use(compression({
+    filter: (req, res) => {
+      // First condition from default implementation
+      const isCompressedByContentType = /json|text|javascript|dart|image\/svg\+xml|application\/x-font-ttf|application\/vnd\.ms-opentype|application\/vnd\.ms-fontobject/.test(res.getHeader('Content-Type'));
+      const isAnImage = req.url.startsWith('/static/media') || req.url.startsWith('/image'); 
+      return isCompressedByContentType || !isAnImage;
+    }
+  }));
 
 app.get('/api/books', (req, res) => {
   res.json(booksData);
