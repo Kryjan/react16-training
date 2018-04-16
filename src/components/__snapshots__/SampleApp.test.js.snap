@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders without crashing when enzyme snapshots taken with mount 1`] = `
-<App>
+<SampleApp>
   <div
     className="App"
   >
@@ -29,7 +29,7 @@ exports[`renders without crashing when enzyme snapshots taken with mount 1`] = `
        and save to reload.
     </p>
   </div>
-</App>
+</SampleApp>
 `;
 
 exports[`renders without crashing when enzyme snapshots taken with render 1`] = `

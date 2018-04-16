@@ -1,43 +1,43 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import SampleApp from "./SampleApp";
 
 import { shallow, mount, render } from "enzyme";
 
 describe("renders without crashing", () => {
   it("when default approach used", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<SampleApp />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
   describe("when enzyme", () => {
     it("shallow used", () => {
-      shallow(<App />);
+      shallow(<SampleApp />);
     });
 
     it("mount used", () => {
-      mount(<App />);
+      mount(<SampleApp />);
     });
   });
 
   describe("when enzyme snapshots taken with", () => {
     it("shallow", () => {
-      expect(shallow(<App />)).toMatchSnapshot();
+      expect(shallow(<SampleApp />)).toMatchSnapshot();
     });
 
     it("mount", () => {
-      expect(mount(<App />)).toMatchSnapshot();
+      expect(mount(<SampleApp />)).toMatchSnapshot();
     });
 
     it("render", () => {
-      expect(render(<App />)).toMatchSnapshot();
+      expect(render(<SampleApp />)).toMatchSnapshot();
     });
   });
 });
 
 describe("renders welcome message", () => {
-  const wrapper = shallow(<App />);
+  const wrapper = shallow(<SampleApp />);
   const welcome = <h1 className="App-title">Welcome to React</h1>;
 
   it('checked with plain enzyme', () => {
