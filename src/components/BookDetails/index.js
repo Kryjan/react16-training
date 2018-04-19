@@ -2,6 +2,17 @@ import React, { Component } from "react";
 
 import { BookDetailsDumb } from './BookDetailsDumb';
 
+
+const changeBook = (self) => (changeObj) => {
+  self.setState((prevState, props) => {
+    const newBook = {...prevState.book, ...changeObj}; 
+    self.props.onBookChange && self.props.onBookChange(newBook);
+    return {
+      book: newBook,
+    };
+  });
+}
+
 export class BookDetails extends Component {
 
   constructor(props){
@@ -11,6 +22,7 @@ export class BookDetails extends Component {
     }
     this.onAuthorsChange = this.onAuthorsChange.bind(this);
     this.onTitleChange = this.onTitleChange.bind(this);
+    this.changeBook = changeBook(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState){
@@ -23,18 +35,13 @@ export class BookDetails extends Component {
     }
   }
 
+  
   onAuthorsChange(e) {
-    const authors = e.target.value;
-    this.setState((prevState, props) => ({
-      book: {...prevState.book, ...{ authors }},
-    }));
+    this.changeBook({authors: e.target.value});
   }
 
   onTitleChange(e) {
-    const title = e.target.value;
-    this.setState((prevState, props) => ({
-      book: {...prevState.book, ...{ title }},
-    }));
+    this.changeBook({title: e.target.value});
   }
 
   render() {

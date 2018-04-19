@@ -11,6 +11,8 @@ export const BookOverviewDumb = ({
   books,
   currentBook,
   onBookSelect,
+  onBookChange,
+  onBookSave,
 }) => (
   <section className="book-overview">
     <table className="table table-hover">
@@ -23,7 +25,7 @@ export const BookOverviewDumb = ({
       </thead>
       <tbody>
         {books.map((book, i) => (
-          <tr onClick={() => onBookSelect(i)} 
+          <tr onClick={() => onBookSelect(book)} 
             className={classnames({
               'table-active': isBookSelected(book, currentBook),
             })}
@@ -37,7 +39,10 @@ export const BookOverviewDumb = ({
       </tbody>
     </table>
     {(currentBook) && 
-      <BookDetails book={currentBook}/>
+      <div>
+        <BookDetails book={currentBook} onBookChange={onBookChange}/>
+        <button onClick={onBookSave}>Save</button>
+      </div>
     }
   </section>
 );
