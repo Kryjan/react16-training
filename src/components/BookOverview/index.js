@@ -22,10 +22,13 @@ export class BookOverview extends Component {
 
   onBookSelect(book) {
     this.setState((prevState) => {
-      return {
-        selectedBookIndex: prevState.books.indexOf(book),
-        updatedBook: book,
-      };
+      const selectedBookIndex = prevState.books.indexOf(book);
+      if (selectedBookIndex !== prevState.selectedBookIndex) {
+        return {
+          selectedBookIndex,
+          updatedBook: book,
+        };
+      }
     });
   }
 
