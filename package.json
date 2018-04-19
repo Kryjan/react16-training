@@ -25,9 +25,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "cypress:open": "cypress open",
     "eject": "react-scripts eject",
     "server:dev": "nodemon server/index.js --watch server --exec node",
     "server": "node server/index.js"
+    
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.9",
