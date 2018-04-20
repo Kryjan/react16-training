@@ -1,64 +1,27 @@
-import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import { BookOverviewDumb } from './BookOverviewDumb';
+import { selectBook, saveBook } from '../../actions'
 
-export class BookOverview extends Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      books: [
-        {id: 1, authors: 'a1', title: 't1'},
-        {id: 2, authors: 'a2', title: 't2'},
-      ],
-      selectedBookIndex: 0,
-    };
-    this.state.updatedBook = this.state.books[this.state.selectedBookIndex];
-
-    this.onBookSelect = this.onBookSelect.bind(this);
-    this.onBookChange = this.onBookChange.bind(this);
-    this.onBookSave = this.onBookSave.bind(this);
-  }
-
-  onBookSelect(book) {
-    this.setState((prevState) => {
-      const selectedBookIndex = prevState.books.indexOf(book);
-      if (selectedBookIndex !== prevState.selectedBookIndex) {
-        return {
-          selectedBookIndex,
-          updatedBook: book,
-        };
-      }
-    });
-  }
-
-  onBookChange(updatedBook) {
-    this.setState((prevState) => {
-      return {
-        updatedBook: {...prevState.updatedBook, ...updatedBook},
-      }}
-    );
-  }
-
-  onBookSave(book) {
-    this.setState((prevState, props) => {
-      const books = [...prevState.books]; 
-      books[prevState.selectedBookIndex] = prevState.updatedBook;
-      return {
-        books,
-      };
-    });
-  }
-
-  render() {
-    return (
-      <BookOverviewDumb 
-        books={this.state.books}
-        currentBook={this.state.updatedBook}
-        onBookSelect={this.onBookSelect}
-        onBookChange={this.onBookChange}
-        onBookSave={this.onBookSave}
-      />
-    );
+const mapStateToProps = state => {
+  return {
+    books: state.books,
+    currentBook: state.currentBook,
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onBookSelect: book => {
+      dispatch(selectBook(book));
+    },
+    onBookSave: book => {
+      dispatch(saveBook(book));
+    },
+  };
+}
+
+export const BookOverview = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BookOverviewDumb)

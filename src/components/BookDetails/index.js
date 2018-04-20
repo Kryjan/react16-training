@@ -1,56 +1,22 @@
-import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import { BookDetailsDumb } from './BookDetailsDumb';
+import { editAuthors, editTitle } from '../../actions'
 
-
-const changeBook = (self) => (changeObj) => {
-  self.setState((prevState, props) => {
-    const newBook = {...prevState.book, ...changeObj}; 
-    self.props.onBookChange && self.props.onBookChange(newBook);
-    return {
-      book: newBook,
-    };
-  });
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuthorsChange: e => {
+      const authors = e.target.value;
+      dispatch(editAuthors(authors));
+    },
+    onTitleChange: e => {
+      const title = e.target.value;
+      dispatch(editTitle(title));
+    },
+  };
 }
 
-export class BookDetails extends Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      book: props.book || {authors: '', title: ''},
-    }
-    this.onAuthorsChange = this.onAuthorsChange.bind(this);
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.changeBook = changeBook(this);
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState){
-    const { book: nextBook } = nextProps;
-    if (prevState.book === nextBook){
-      return null;
-    }
-    return {
-      book: nextBook,
-    }
-  }
-
-  
-  onAuthorsChange(e) {
-    this.changeBook({authors: e.target.value});
-  }
-
-  onTitleChange(e) {
-    this.changeBook({title: e.target.value});
-  }
-
-  render() {
-    return (
-      <BookDetailsDumb 
-        book={this.state.book} 
-        onAuthorsChange={this.onAuthorsChange} 
-        onTitleChange={this.onTitleChange} 
-      />
-    );
-  }
-}
+export const BookDetails = connect(
+  () => ({}),
+  mapDispatchToProps
+)(BookDetailsDumb)
