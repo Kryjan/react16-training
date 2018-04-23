@@ -7,10 +7,7 @@ export class BookOverview extends Component {
   constructor(props){
     super(props);
     this.state = {
-      books: [
-        {id: 1, authors: 'a1', title: 't1'},
-        {id: 2, authors: 'a2', title: 't2'},
-      ],
+      books: this.props.books,
       selectedBookIndex: 0,
     };
     this.state.updatedBook = this.state.books[this.state.selectedBookIndex];
