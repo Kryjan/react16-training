@@ -1,0 +1,28 @@
+.book-form .form-group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px; 
+    padding: 10px;
+}
+
+.book-form .form-group label{
+    flex: 2;
+}
+.book-form .form-group input{
+    flex: 15;
+}
+.book-form label {
+    font-weight: bold;
+}
+
+.book-result{
+    margin: 20px;
+}
+            
+@media(max-width:700px){
+    .book-form .form-group{
+        display: block;
+    }
+}
+

@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { Hello } from './components/Hello';
+import { BookOverview } from './components/BookOverview';
 import './App.css';
-
+const books = [
+  { id: 1, author: 'David Flanagan', title: 'JS: Definitive Guide' },
+  { id: 2, author: 'Douglas Crockford', title: 'JS: The Good Parts' },
+]
 
 export class App extends Component {
-  
-  world = 'World';
+
 
   render() {
     return (
-        <div className="book-app">
-          <Hello who={this.world}></Hello>
-        </div>
-      );
+      <div className="book-app">
+        <BookOverview books={books}></BookOverview>
+      </div>
+    );
   }
 }

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing when enzyme snapshots taken with mount 1`] = `
+<Component
+  onWhoChange={[Function]}
+  who="Kryjan"
+>
+  <div
+    className="hello-container"
+  >
+    <span
+      className="hello"
+    >
+      Hello 
+      Kryjan
+    </span>
+    <input
+      onChange={[Function]}
+      type="text"
+      value="Kryjan"
+    />
+  </div>
+</Component>
+`;
+
+exports[`renders without crashing when enzyme snapshots taken with render 1`] = `
+<div
+  class="hello-container"
+>
+  <span
+    class="hello"
+  >
+    Hello Kryjan
+  </span>
+  <input
+    type="text"
+    value="Kryjan"
+  >
+    
+  </input>
+</div>
+`;
+
+exports[`renders without crashing when enzyme snapshots taken with shallow 1`] = `
+<div
+  className="hello-container"
+>
+  <span
+    className="hello"
+  >
+    Hello 
+    Kryjan
+  </span>
+  <input
+    onChange={[Function]}
+    type="text"
+    value="Kryjan"
+  />
+</div>
+`;
